@@ -1,7 +1,7 @@
 class Commit
   class << self
 
-    def by_date(date = 2.days.ago)
+    def by_date(date = Date.today)
       Octokit.commits_on(repo, date).map(&method(:to_item)).reject(&:merge_commit?).sort
     end
 
