@@ -4,3 +4,4 @@ table
     tr
       td = commit.commit.message
       td = commit.commit.author.name
+      td = (commit.issue_html_url ? (link_to 'Issue', commit.issue_html_url) : '')
