@@ -1,5 +1,6 @@
 table
-  - @events.each do |event|
+  caption Commits
+  - @commits.each do |commit|
     tr
-      td = event.type
-      td = event.repo.name
+      td = commit.commit.message
+      td = commit.commit.author.name

@@ -1,9 +1,7 @@
 class WelcomeController < ApplicationController
 
   def index
-    @events = Octokit.user_events(Octokit.user.login)
+    @commits = Commit.by_date
   end
-
-  private
 
 end
