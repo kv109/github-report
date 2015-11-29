@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
+
+gem 'octokit', '~> 4.0'
+gem 'figaro'
+
 ruby '2.2.2'
 gem 'rails', '4.2.5'
 gem 'sass-rails', '~> 5.0'
