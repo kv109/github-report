@@ -1,9 +1,9 @@
 class Commit
   class << self
 
-    def by_date(date = 1.days.ago)
+    def by_date(date = 24.hours.ago)
       @collection = branches.map(&:name).map do |branch|
-        Octokit.commits_on(repo, date, branch)
+        Octokit.commits_since(repo, date, branch)
       end.flatten
       self
     end
