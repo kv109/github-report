@@ -1,8 +1,8 @@
 class Commit
   class << self
 
-    def by_date(date = Date.today)
-      Octokit.commits_on(repo, date).map(&method(:to_item)).reject(&:merge_commit?).sort
+    def by_date(date = 1.days.ago)
+      Octokit.commits_on(repo, date).map(&method(:to_item)).reject(&:merge_commit?).group_by(&:committer_name)
     end
 
     def to_item(resource)
@@ -27,6 +27,14 @@ class Commit
       return 1 unless issue_number
       return -1 unless other.issue_number
       issue_number <=> other.issue_number
+    end
+
+    def committer
+      commit.committer
+    end
+
+    def committer_name
+      committer.name
     end
 
     def issue_number

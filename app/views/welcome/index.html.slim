@@ -1,7 +1,7 @@
-table
-  caption Commits
-  - @commits.each do |commit|
-    tr
-      td = commit.commit.message
-      td = commit.commit.author.name
-      td = (commit.issue_html_url ? (link_to 'Issue', commit.issue_html_url) : '')
+- @commits.each do |committer, commits|
+  table width=800
+    caption = committer
+    - commits.sort.each do |commit|
+      tr
+        td = commit.commit.message
+        td = (commit.issue_html_url ? (link_to 'Issue', commit.issue_html_url) : '')
