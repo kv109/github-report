@@ -2,7 +2,8 @@ class Commit
   class << self
 
     def by_date(date = 1.days.ago)
-      Octokit.commits_on(repo, date).map(&method(:to_item)).reject(&:merge_commit?).group_by(&:committer_name)
+      @collection = Octokit.commits_on(repo, date).map(&method(:to_item)).reject(&:merge_commit?)
+      self
     end
 
     def to_item(resource)
@@ -11,6 +12,10 @@ class Commit
 
     def repo
       ENV.fetch('GITHUB_REPO')
+    end
+
+    def get
+      @collection.map(&method(:to_item))
     end
 
   end
