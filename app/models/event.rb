@@ -1,11 +1,11 @@
 class Event
   def self.by_organization_and_user
-    @collection = Octokit.paginate("#{base_uri}orgs/#{org}", per_page: 1000).map(&method(:to_item))
+    @collection = Octokit.paginate("#{base_uri}orgs/#{org}", per_page: 1000)
     self
   end
 
   def self.issues
-    @collection.select(&:issues_event?)
+    @collection.map(&method(:to_item)).select(&:issues_event?)
   end
 
   def self.to_item(resource)
@@ -34,7 +34,6 @@ class Event
     include Decorator
 
     def issues_event?
-      p type
       type == 'IssuesEvent'
     end
   end

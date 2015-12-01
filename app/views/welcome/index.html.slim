@@ -1,7 +1,7 @@
 - @commits.group_by(&:committer_name).each do |committer, commits|
   table width=800
     caption = committer
-    - commits.each do |commit|
+    - commits.sort.each do |commit|
       tr
         td = commit.commit.message
 
