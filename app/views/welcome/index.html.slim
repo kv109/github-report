@@ -1,9 +1,11 @@
 - @commits.group_by(&:committer_name).each do |committer, commits|
   table width=800
     caption = committer
-    - commits.sort.each do |commit|
+    - commits.uniq(&:commit_message).sort.each do |commit|
       tr
         td = commit.commit.message
+        td width=100
+          = (commit.issue_html_url ? (link_to "Issue #{commit.issue_number}", commit.issue_html_url) : '')
 
 - @events.group_by(&:type).each do |type, events|
   table width=800

@@ -2,7 +2,9 @@ class Commit
   class << self
 
     def by_date(date = 1.days.ago)
-      @collection = Octokit.commits_on(repo, date).map(&method(:to_item)).reject(&:merge_commit?)
+      @collection = branches.map(&:name).map do |branch|
+        Octokit.commits_on(repo, date, branch)
+      end.flatten
       self
     end
 
@@ -14,8 +16,12 @@ class Commit
       ENV.fetch('GITHUB_REPO')
     end
 
+    def branches
+      Branch.by_repo.get
+    end
+
     def get
-      @collection.map(&method(:to_item))
+      @collection.map(&method(:to_item)).reject(&:merge_commit?)
     end
 
   end
