@@ -1,4 +1,4 @@
 Octokit.configure do |c|
-  c.login = ENV['GITHUB_LOGIN']
-  c.password = ENV['GITHUB_PASSWORD']
+  c.client_id = ENV['GITHUB_KEY']
+  c.client_secret = ENV['GITHUB_SECRET']
 end
