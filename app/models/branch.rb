@@ -1,24 +1,13 @@
 class Branch
-  class << self
-    def by_repo
-      @collection = Octokit.branches(repo)
-      self
-    end
 
-    def get
-      @collection.map(&method(:to_item))
-    end
+  include Query
 
-    def to_item(resource)
-      Item.new(resource)
-    end
-
-    private
-
-    def repo
-      ENV.fetch('GITHUB_REPO')
-    end
+  def by_repo(repo)
+    @query = [:branches, repo]
+    self
   end
+
+  private
 
   class Item < Sawyer::Resource
     include Decorator

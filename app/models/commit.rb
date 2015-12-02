@@ -1,29 +1,20 @@
 class Commit
-  class << self
 
-    def by_date(date = 24.hours.ago)
-      @collection = branches.map(&:name).map do |branch|
-        Octokit.commits_since(repo, date, branch)
-      end.flatten
-      self
+  include Query
+
+  def by_repo_and_date(repo, date = 24.hours.ago)
+    @queries = branches(repo).map(&:name).map do |branch|
+      [:commits_since, Query.repo, date, branch]
     end
+    self
+  end
 
-    def to_item(resource)
-      Item.new(resource)
-    end
+  def branches(repo)
+    Branch.new(client).by_repo(repo).get[0..2]
+  end
 
-    def repo
-      ENV.fetch('GITHUB_REPO')
-    end
-
-    def branches
-      Branch.by_repo.get
-    end
-
-    def get
-      @collection.map(&method(:to_item)).reject(&:merge_commit?)
-    end
-
+  def send_query(query)
+    super.reject(&:merge_commit?)
   end
 
   class Item < Sawyer::Resource
@@ -31,7 +22,7 @@ class Commit
     include Decorator
 
     def issue_html_url
-      "https://github.com/#{Commit.repo}/issues/#{issue_number}" if issue_number
+      "https://github.com/#{Query.repo}/issues/#{issue_number}" if issue_number
     end
 
     def <=>(other)
