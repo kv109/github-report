@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
 
+ruby '2.2.2'
+
 gem 'octokit', '~> 4.0'
 gem 'figaro'
+gem 'omniauth-github'
+gem 'devise'
 
-ruby '2.2.2'
 gem 'rails', '4.2.5'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
