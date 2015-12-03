@@ -1,4 +1,8 @@
-ul
+h2
+  | Active collaborators for
+  strong=< @current_repo
+
+ol
   - @collaborators.each do |collaborator|
     li
       = collaborator.login
