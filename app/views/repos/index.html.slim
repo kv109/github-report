@@ -1,0 +1,4 @@
+ul
+  - @repos.each do |repo|
+    li
+      = link_to repo.full_name, show_repo_path(repo.full_name)

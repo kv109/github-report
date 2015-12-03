@@ -1,0 +1,5 @@
+ul
+  - @collaborators.each do |collaborator|
+    li
+      = collaborator.login
+      /= link_to collaborator.full_name, show_collaborator_path(collaborator.full_name)
