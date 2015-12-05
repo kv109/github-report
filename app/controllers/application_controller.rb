@@ -34,6 +34,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_repo_owner!
 
+  def current_repo_full_name!
+    "#{current_repo_owner!}/#{current_repo!}"
+  end
+  helper_method :current_repo_owner!
+
   def current_collaborator!
     params.fetch(:user)
   end
