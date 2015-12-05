@@ -8,4 +8,34 @@ class ApplicationController < ActionController::Base
   def set_client
     @client = Octokit::Client.new(:access_token => current_user.token) if current_user
   end
+
+  def current_repo
+    params[:repo]
+  end
+  helper_method :current_repo
+
+  def current_repo_owner
+    params[:owner]
+  end
+  helper_method :current_repo_owner
+
+  def current_collaborator
+    params[:user]
+  end
+  helper_method :current_collaborator
+
+  def current_repo!
+    params.fetch(:repo)
+  end
+  helper_method :current_repo!
+
+  def current_repo_owner!
+    params.fetch(:owner)
+  end
+  helper_method :current_repo_owner!
+
+  def current_collaborator!
+    params.fetch(:user)
+  end
+  helper_method :current_collaborator!
 end

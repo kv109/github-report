@@ -5,5 +5,4 @@ h2
 ol
   - @collaborators.each do |collaborator|
     li
-      = collaborator.login
-      /= link_to collaborator.full_name, show_collaborator_path(collaborator.full_name)
+      = link_to collaborator.login, user_report_path(current_repo_owner!, current_repo!, collaborator.login)
