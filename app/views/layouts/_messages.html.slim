@@ -1,6 +1,6 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    .alert-box.round class=("<%= name.to_s == 'notice' ? 'success' 'alert' %>") data-alert=""
+    .alert-box.small-5.columns.small-centered class=(name.to_s == 'notice' ? 'success' : 'alert') data-alert=""
       = content_tag :div, msg
       a.close href="#"  &times;
 

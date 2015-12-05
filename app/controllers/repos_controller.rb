@@ -5,5 +5,6 @@ class ReposController < ApplicationController
 
   def show
     @collaborators = Collaborator.new(@client).by_repo(params.fetch(:repo)).get
+    @current_repo = params.fetch(:repo)
   end
 end
