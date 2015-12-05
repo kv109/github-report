@@ -2,7 +2,7 @@ class Commit
 
   include Query
 
-  def by_repo_user_and_date(repo, user, date = 24.hours.ago)
+  def by_repo_and_user_and_date(repo, user, date = 24.hours.ago)
     @queries = branches(repo).map(&:name).map do |branch|
       [:commits_since, Query.repo, date, branch, author: user]
     end
@@ -10,7 +10,7 @@ class Commit
   end
 
   def branches(repo)
-    Branch.new(client).by_repo(repo).get[0..2]
+    Branch.new(client).by_repo(repo).get#[0..2]
   end
 
   def send_query(query)
