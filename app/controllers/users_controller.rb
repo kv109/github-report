@@ -4,4 +4,14 @@ class UsersController < ApplicationController
     @events  = []
     # @events = Event.by_organization_and_user.get
   end
+
+  private
+
+  def add_breadcrumbs
+    [
+        [current_repo!, show_repo_path(current_repo_owner!, current_repo!)],
+        [current_collaborator!, user_report_path(current_repo_owner!, current_repo!, current_collaborator!)]
+    ]
+  end
+
 end

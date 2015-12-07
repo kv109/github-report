@@ -43,4 +43,15 @@ class ApplicationController < ActionController::Base
     params.fetch(:user)
   end
   helper_method :current_collaborator!
+
+  def breadcrumbs
+    [].tap do |b|
+      b.concat(add_breadcrumbs) if add_breadcrumbs.present?
+    end
+  end
+  helper_method :breadcrumbs
+
+  def add_breadcrumbs
+    nil
+  end
 end
