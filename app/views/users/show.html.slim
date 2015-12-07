@@ -1,11 +1,18 @@
-- @commits.group_by(&:committer_name).each do |committer, commits|
-  table width=800
-    caption = committer
-    - commits.uniq(&:commit_message).sort.each do |commit|
+table.full-width
+  caption Commits (#{@commits.size})
+  thead
+    th Message
+    th Link
+    th Date
+  tbody
+    - @commits.uniq(&:sha).sort_by(&:created_at).reverse.each do |commit|
       tr
-        td = commit.commit.message
+        td
+          = commit.commit_message
         td width=100
           = (commit.issue_html_url ? (link_to "Issue #{commit.issue_number}", commit.issue_html_url) : '')
+        td width=300
+          = "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
 
 - @events.group_by(&:type).each do |type, events|
   table width=800

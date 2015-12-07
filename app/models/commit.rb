@@ -42,6 +42,10 @@ class Commit
       committer.name
     end
 
+    def created_at
+      committer.date
+    end
+
     def issue_number
       match = commit.message.match(/#(\d+)/)
       match[1] if match
