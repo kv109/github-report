@@ -4,7 +4,7 @@ class Commit
 
   def by_repo_and_user_and_date(repo, user, date = 24.hours.ago)
     @queries = branches(repo).map(&:name).map do |branch|
-      [:commits_since, Query.repo, date, branch, author: user]
+      [:commits_since, repo, date, branch, author: user]
     end
     self
   end
