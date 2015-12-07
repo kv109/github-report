@@ -7,17 +7,14 @@ table.full-width
   tbody
     - @commits.uniq(&:sha).sort_by(&:created_at).reverse.each do |commit|
       tr
-        td
-          = commit.commit_message
-        td
-          = (commit.issue_html_url ? (link_to "Issue #{commit.issue_number}", commit.issue_html_url) : '')
-        td
-          = "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
+        td= commit.commit_message
+        td= (commit.issue_html_url ? (link_to "Issue #{commit.issue_number}", commit.issue_html_url) : '')
+        td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
 
 - @events.group_by(&:type).each do |type, events|
   table width=800
-    caption = type
+    caption= type
     - events.each do |event|
       tr
-        td = event.actor.login
-        td = event.type
+        td= event.actor.login
+        td= event.type
