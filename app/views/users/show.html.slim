@@ -1,3 +1,8 @@
+.user-report-title
+  span.user-report-title-1= current_collaborator!.upcase
+  br
+  span.user-report-title-2
+    |  last 24h
 table.full-width
   caption Commits (#{@commits.size})
   thead
