@@ -8,7 +8,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body data-remaining-rate-limit="<%= @client.rate_limit_remaining %>">
+  <body data-remaining-rate-limit="<%= @client.rate_limit_remaining if @client %>">
     <header>
       <%= render 'layouts/navigation' %>
     </header>
