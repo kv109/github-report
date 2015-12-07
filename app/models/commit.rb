@@ -22,7 +22,10 @@ class Commit
     include Decorator
 
     def issue_html_url
-      "https://github.com/#{Query.repo}/issues/#{issue_number}" if issue_number
+      return unless issue_number
+
+      base_url = html_url.partition('/commit')[0]
+      [base_url, 'issues', issue_number].join('/')
     end
 
     def <=>(other)

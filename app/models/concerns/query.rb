@@ -33,9 +33,4 @@ module Query
   def to_item(resource)
     self.class::Item.new(resource)
   end
-
-  def self.repo
-    ENV['GITHUB_REPO']
-  end
-
 end
