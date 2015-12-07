@@ -2,14 +2,16 @@ table.full-width
   caption Commits (#{@commits.size})
   thead
     th Message
-    th Link
     th Date
   tbody
-    - @commits.uniq(&:sha).sort_by(&:created_at).reverse.each do |commit|
+    - @commits.group_by(&:issue_number).each do |issue_number, commits|
       tr
-        td= commit.commit_message
-        td= (commit.issue_html_url ? (link_to "Issue #{commit.issue_number}", commit.issue_html_url) : '')
-        td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
+        td.issue-number colspan=2
+          = (issue_number ? (link_to "Issue #{commits[0].issue_number}", commits[0].issue_html_url) : 'Non assigned commits')
+      - commits.uniq(&:sha).sort_by(&:created_at).reverse.each do |commit|
+        tr
+          td= commit.commit_message
+          td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
 
 - @events.group_by(&:type).each do |type, events|
   table width=800
