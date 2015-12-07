@@ -9,9 +9,9 @@ table.full-width
       tr
         td
           = commit.commit_message
-        td width=100
+        td
           = (commit.issue_html_url ? (link_to "Issue #{commit.issue_number}", commit.issue_html_url) : '')
-        td width=300
+        td
           = "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
 
 - @events.group_by(&:type).each do |type, events|
