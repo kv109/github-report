@@ -9,10 +9,21 @@ module Query
     if @query
       send_query(@query)
     elsif @queries
-      @queries.map do |query|
-        send_query(query)
-      end.flatten
+      send_multiple_queries(@queries)
     end
+  end
+
+  def send_multiple_queries(queries)
+    threads, results = [], []
+
+    queries.map do |query|
+      threads << Thread.new do
+        results.concat send_query(query)
+      end
+    end
+
+    threads.each(&:join)
+    results
   end
 
   def send_query(query)
