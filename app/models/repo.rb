@@ -3,7 +3,7 @@ class Repo
   include Query
 
   def repos
-    @query = [:repos, per_page: 200]
+    @query = [:repos, nil, per_page: 200]
     self
   end
 
