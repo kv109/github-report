@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   def show
     @commits = Commit.new(@client).by_repo_and_user_and_date(current_repo_full_name!, current_collaborator!).get
-    @comments  = Comment.new(@client).by_repo_and_date(current_repo_full_name!, Date.today).get
+    @comments  = Comment.new(@client).by_repo_and_date(current_repo_full_name!, Date.today).
+        where(author: current_collaborator!).
+        get
   end
 
   private

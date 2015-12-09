@@ -9,5 +9,9 @@ class Comment
 
   class Item < Sawyer::Resource
     include Decorator
+
+    def author
+      user.login
+    end
   end
 end
