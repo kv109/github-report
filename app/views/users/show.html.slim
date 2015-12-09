@@ -3,7 +3,8 @@
   br
   span.user-report-title-2
     |  last 24h
-table.full-width
+
+table.full-width.report-table
   caption Commits (#{@commits.size})
   thead
     th Message
@@ -20,8 +21,9 @@ table.full-width
           td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
           td= link_to 'Link', commit.html_url
 
-table width=800
+table.full-width.report-table
   caption Comments (#{@comments.size})
   - @comments.each do |comment|
     tr
-      td= comment.body.truncate(100)
+      td= comment.body.truncate(60)
+      td= link_to 'See comment', comment.html_url
