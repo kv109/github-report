@@ -5,17 +5,17 @@
     |  last 24h
 
 table.full-width.report-table
-  caption Commits (#{@commits.size})
+  caption Commits (#{@view.commits.size})
   thead
     th Message
     th Date
     th
   tbody
-    - @commits.group_by(&:issue_number).each do |issue_number, commits|
+    - @view.commits_grouped_by_issue.each do |issue_number, commits|
       tr
         td.issue-number colspan=3
           = (issue_number ? (link_to "Issue #{commits[0].issue_number}", commits[0].issue_html_url) : 'Non assigned commits')
-      - commits.uniq(&:sha).sort_by(&:created_at).reverse.each do |commit|
+      - commits.each do |commit|
         tr
           td= commit.commit_message
           td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
