@@ -1,8 +1,8 @@
-class Issue
+class Comment
 
   include Query
 
-  def comments_by_repo_and_date(repo, date)
+  def by_repo_and_date(repo, date)
     @query = [:issues_comments, repo, since: date]
     self
   end
