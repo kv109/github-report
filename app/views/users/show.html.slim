@@ -20,10 +20,8 @@ table.full-width
           td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
           td= link_to 'Link', commit.html_url
 
-- @events.group_by(&:type).each do |type, events|
-  table width=800
-    caption= type
-    - events.each do |event|
-      tr
-        td= event.actor.login
-        td= event.type
+table width=800
+  caption Comments (#{@comments.size})
+  - @comments.each do |comment|
+    tr
+      td= comment.body.truncate(100)
