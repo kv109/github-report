@@ -4,26 +4,32 @@
   span.user-report-title-2
     |  last 24h
 
-table.full-width.report-table
-  caption Commits (#{@view.commits.size})
-  thead
-    th Message
-    th Date
-    th
-  tbody
-    - @view.commits_grouped_by_issue.each do |issue_number, commits|
-      tr
-        td.issue-number colspan=3
-          = (issue_number ? (link_to "Issue #{commits[0].issue_number}", commits[0].issue_html_url) : 'Non assigned commits')
-      - commits.each do |commit|
+.row
+  table.report-table.small-11.columns
+    caption Commits (#{@view.commits.size})
+    thead
+      th Message
+      th Date
+      th
+    tbody
+      - @view.commits_grouped_by_issue.each do |issue_number, commits|
         tr
-          td= commit.commit_message
-          td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
-          td= link_to 'Link', commit.html_url
+          td.issue-number colspan=3
+            = (issue_number ? (link_to "Issue #{commits[0].issue_number}", commits[0].issue_html_url) : 'Non assigned commits')
+        - commits.each do |commit|
+          tr
+            td= commit.commit_message
+            td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
+            td= link_to 'Link', commit.html_url
 
-table.full-width.report-table
-  caption Comments (#{@comments.size})
-  - @comments.each do |comment|
-    tr
-      td= comment.body.truncate(60)
-      td= link_to 'See comment', comment.html_url
+.row
+  table.report-table.small-11-columns
+    caption Comments (#{@comments.size})
+    thead
+      th Body
+      th
+    tbody
+    - @comments.each do |comment|
+      tr
+        td= comment.body.truncate(60)
+        td= link_to 'See comment', comment.html_url
