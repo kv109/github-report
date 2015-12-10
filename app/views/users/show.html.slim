@@ -1,8 +1,11 @@
-.user-report-title
-  span.user-report-title-1= current_collaborator!.upcase
-  span.user-report-title-2
-    |  last 24h
+.user-report-menu
+  span.user-report-title-1= "#{current_collaborator!.upcase} - #{@date.to_s(:short)}"
 
+  .date-links.right
+    ul.inline-list
+      - (0..5).map do |i|
+        li
+          = link_to("#{i} days ago", user_report_path(current_repo_owner!, current_repo!, current_collaborator!, date: i.days.ago.utc.strftime('%Y%m%d')), class: 'button tiny')
 .row
   .small-11-columns
     table.report-table
@@ -27,6 +30,7 @@
           tr.header-row
             th colspan=3 No commits :(
 
+.row
   .small-11-columns
     table.report-table
       caption Comments (#{@view.comments.size})
