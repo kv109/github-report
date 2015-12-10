@@ -5,7 +5,13 @@
     ul.inline-list
       - (0..5).map do |i|
         li
-          = link_to("#{i} days ago", user_report_path(current_repo_owner!, current_repo!, current_collaborator!, date: i.days.ago.utc.strftime('%Y%m%d')), class: 'button tiny')
+          - if i.zero?
+            - title = 'Today'
+          - elsif i < 2
+            - title = 'Yesterday'
+          - else
+            - title = "#{i} days ago"
+          = link_to(title, user_report_path(current_repo_owner!, current_repo!, current_collaborator!, date: i.days.ago.utc.strftime('%Y%m%d')), class: 'button tiny')
 .row
   .small-11-columns
     table.report-table
