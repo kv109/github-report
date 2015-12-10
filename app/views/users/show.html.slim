@@ -39,16 +39,16 @@
 .row
   .small-11-columns
     table.report-table
-      caption Comments (#{@view.comments.size})
-      - if @view.comments.present?
+      caption Comments (#{@view.all_comments.size})
+      - if @view.all_comments.present?
         thead
           th Body
           th Date
           th
         tbody
-        - @view.comments.each do |comment|
+        - @view.all_comments.each do |comment|
           tr
-            td= comment.body.truncate(60)
+            td= comment.body.truncate(100)
             td= "#{distance_of_time_in_words(Time.now, comment.created_at)} ago"
             td= link_to 'See comment', comment.html_url
       - else

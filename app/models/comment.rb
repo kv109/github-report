@@ -2,16 +2,22 @@ class Comment
 
   include Query
 
-  def by_repo_and_date(repo, date)
-    @query = [:issues_comments, repo, since: date]
+  def by_repo(repo)
+    @query = [:repository_events, repo]
     self
   end
 
+  def send_query(query)
+    super.select(&:code_review_comment?)
+  end
+
   class Item < Sawyer::Resource
+    CODE_REVIEW_TYPES = %w(PullRequestReviewCommentEvent)
+
     include Decorator
 
-    def author
-      user.login
+    def code_review_comment?
+      type.in? CODE_REVIEW_TYPES
     end
   end
 end

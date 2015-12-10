@@ -3,9 +3,10 @@ class UsersController < ApplicationController
 
   def show
     commits  = Commit.new(@client).by_repo_and_user_and_date(current_repo_full_name!, current_collaborator!, @date).get
-    comments = Comment.new(@client).by_repo_and_date(current_repo_full_name!, @date).where(author: current_collaborator!).get
+    issue_comments = IssueComment.new(@client).by_repo_and_date(current_repo_full_name!, @date).where(author: current_collaborator!).get
+    code_review_comments = Comment.new(@client).by_repo(current_repo_full_name!).get
 
-    @view = UsersShowView.new(commits, comments)
+    @view = UsersShowView.new(commits, issue_comments, code_review_comments)
   end
 
   private

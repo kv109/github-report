@@ -1,9 +1,14 @@
 class UsersShowView
-  attr_reader :commits, :comments
+  attr_reader :commits, :issue_comments, :code_review_comments
 
-  def initialize(commits, comments)
+  def initialize(commits, issue_comments, code_review_comments)
     @commits = commits.uniq(&:sha)
-    @comments = comments
+    @issue_comments = issue_comments
+    @code_review_comments = code_review_comments
+  end
+
+  def all_comments
+    @all_comments ||= (issue_comments + code_review_comments).sort_by(&:created_at).reverse
   end
 
   def commits_grouped_by_issue
