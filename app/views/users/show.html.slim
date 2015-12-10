@@ -1,35 +1,47 @@
 .user-report-title
   span.user-report-title-1= current_collaborator!.upcase
-  br
   span.user-report-title-2
     |  last 24h
 
 .row
-  table.report-table.small-11.columns
-    caption Commits (#{@view.commits.size})
-    thead
-      th Message
-      th Date
-      th
-    tbody
-      - @view.commits_grouped_by_issue.each do |issue_number, commits|
-        tr
-          td.issue-number colspan=3
-            = (issue_number ? (link_to "Issue #{commits[0].issue_number}", commits[0].issue_html_url) : 'Non assigned commits')
-        - commits.each do |commit|
-          tr
-            td= commit.commit_message
-            td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
-            td= link_to 'Link', commit.html_url
+  .small-11-columns
+    table.report-table
+      caption Commits (#{@view.commits.size})
+      - if @view.commits.present?
+        thead
+          th Message
+          th Date
+          th
+        tbody
+          - @view.commits_grouped_by_issue.each do |issue_number, commits|
+            tr.header-row
+              td colspan=3
+                = (issue_number ? (link_to "Issue #{commits[0].issue_number}", commits[0].issue_html_url) : 'Non assigned commits')
+            - commits.each do |commit|
+              tr
+                td= commit.commit_message
+                td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
+                td= link_to 'Link', commit.html_url
+      - else
+        thead
+          tr.header-row
+            th colspan=3 No commits :(
 
-.row
-  table.report-table.small-11-columns
-    caption Comments (#{@comments.size})
-    thead
-      th Body
-      th
-    tbody
-    - @comments.each do |comment|
-      tr
-        td= comment.body.truncate(60)
-        td= link_to 'See comment', comment.html_url
+  .small-11-columns
+    table.report-table
+      caption Comments (#{@comments.size})
+      - if @comments.present?
+        thead
+          th Body
+          th Date
+          th
+        tbody
+        - @comments.each do |comment|
+          tr
+            td= comment.body.truncate(60)
+            td= "#{distance_of_time_in_words(Time.now, comment.created_at)} ago"
+            td= link_to 'See comment', comment.html_url
+      - else
+        thead
+          tr.header-row
+            th colspan=3 No comments :(
