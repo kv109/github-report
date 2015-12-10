@@ -29,14 +29,14 @@
 
   .small-11-columns
     table.report-table
-      caption Comments (#{@comments.size})
-      - if @comments.present?
+      caption Comments (#{@view.comments.size})
+      - if @view.comments.present?
         thead
           th Body
           th Date
           th
         tbody
-        - @comments.each do |comment|
+        - @view.comments.each do |comment|
           tr
             td= comment.body.truncate(60)
             td= "#{distance_of_time_in_words(Time.now, comment.created_at)} ago"

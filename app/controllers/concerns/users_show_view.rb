@@ -1,8 +1,9 @@
 class UsersShowView
-  attr_reader :commits
+  attr_reader :commits, :comments
 
-  def initialize(commits)
+  def initialize(commits, comments)
     @commits = commits.uniq(&:sha)
+    @comments = comments
   end
 
   def commits_grouped_by_issue
