@@ -52,7 +52,7 @@
           tr
             td= comment.body.truncate(100)
             td= "#{distance_of_time_in_words(Time.now, comment.created_at)} ago"
-            td= link_to 'See comment', comment.html_url
+            td= link_to 'Link', comment.html_url
       - else
         thead
           tr.header-row
