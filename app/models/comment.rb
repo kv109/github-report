@@ -25,7 +25,7 @@ class Comment
     end
 
     def html_url
-      payload.comment.body
+      payload.comment.html_url
     end
 
     def author
