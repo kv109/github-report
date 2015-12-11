@@ -32,7 +32,7 @@
               tr
                 td= commit.commit_message
                 td= "#{distance_of_time_in_words(Time.now, commit.created_at)} ago"
-                td= link_to 'Link', commit.html_url
+                td= link_to 'Link', commit.html_url, target: '_BLANK'
       - else
         thead
           tr.header-row
@@ -52,7 +52,7 @@
           tr
             td= comment.body.truncate(100)
             td= "#{distance_of_time_in_words(Time.now, comment.created_at)} ago"
-            td= link_to 'Link', comment.html_url
+            td= link_to 'Link', comment.html_url, target: '_BLANK'
       - else
         thead
           tr.header-row
