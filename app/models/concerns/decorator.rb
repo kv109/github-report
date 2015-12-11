@@ -20,7 +20,7 @@ module Decorator
     @component.respond_to?(meth)
   end
 
-  def inspect
-    @component.inspect
+  def marshal_load
+    Marshal.dump(@component)
   end
 end

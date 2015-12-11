@@ -6,6 +6,8 @@ gem 'octokit', '~> 4.0'
 gem 'figaro'
 gem 'omniauth-github'
 gem 'devise'
+gem 'dalli'
+gem 'connection_pool'
 
 gem 'rails', '4.2.5'
 gem 'sass-rails', '~> 5.0'
@@ -20,6 +22,7 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'puma'
 end
 gem 'foundation-rails'
 gem 'high_voltage'

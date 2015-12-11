@@ -38,20 +38,54 @@ module Query
   end
 
   def send_query(query)
-    client.send(*query).map(&method(:to_item)).tap do |results|
-      if conditions.present?
-        conditions.each do |condition|
-          condition.each do |key, value|
-            results.select! do |result|
-              result.send(key) == value
-            end
+    key = query_cache_key(query)
+    cached_results = read_cache_from_query(key)
+    return filter_results(cached_results) unless cached_results.nil?
+
+    client.send(*query)
+        .map(&:to_hash).tap do |hashes|
+          write_query_to_cache(key, hashes)
+        end.map(&method(:to_item)).tap do |results|
+          filter_results(results)
+        end
+  end
+
+  def filter_results(results)
+    if conditions.present?
+      conditions.each do |condition|
+        condition.each do |key, value|
+          results.select! do |result|
+            result.send(key) == value
           end
         end
       end
     end
+    results
   end
 
-  def to_item(resource)
-    self.class::Item.new(OpenStruct.new(resource.to_hash))
+  def write_query_to_cache(key, results)
+    results = :empty_array if results == []
+    Rails.cache.write(key, results)
+  end
+
+  def read_cache_from_query(key)
+    cached_results = Rails.cache.read(key)
+    return nil if cached_results.nil?
+    return [] if cached_results == :empty_array
+    cached_results.map(&method(:to_item))
+  end
+
+  def query_cache_key(query)
+    query.map do |param|
+      if param.is_a?(Hash)
+        param.keys.join + param.values.join
+      else
+        param.to_s
+      end
+    end.join
+  end
+
+  def to_item(resource_hash)
+    self.class::Item.new(OpenStruct.new(resource_hash))
   end
 end
