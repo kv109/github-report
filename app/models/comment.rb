@@ -19,5 +19,17 @@ class Comment
     def code_review_comment?
       type.in? CODE_REVIEW_TYPES
     end
+
+    def body
+      payload.comment.body
+    end
+
+    def html_url
+      payload.comment.body
+    end
+
+    def author
+      actor.login
+    end
   end
 end
