@@ -7,7 +7,7 @@ class IssueComment
     self
   end
 
-  class Item < Sawyer::Resource
+  class Item
     include Decorator
 
     def author

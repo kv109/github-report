@@ -11,7 +11,7 @@ class Comment
     super.select(&:code_review_comment?)
   end
 
-  class Item < Sawyer::Resource
+  class Item
     CODE_REVIEW_TYPES = %w(PullRequestReviewCommentEvent)
 
     include Decorator

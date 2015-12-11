@@ -52,6 +52,6 @@ module Query
   end
 
   def to_item(resource)
-    self.class::Item.new(resource)
+    self.class::Item.new(OpenStruct.new(resource.to_hash))
   end
 end

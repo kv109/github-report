@@ -17,7 +17,7 @@ class Commit
     super.reject(&:merge_commit?)
   end
 
-  class Item < Sawyer::Resource
+  class Item
 
     include Decorator
 

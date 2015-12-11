@@ -9,7 +9,7 @@ class Collaborator
 
   private
 
-  class Item < Sawyer::Resource
+  class Item
     include Decorator
   end
 end
