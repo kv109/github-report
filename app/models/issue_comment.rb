@@ -13,5 +13,9 @@ class IssueComment
     def author
       user.login
     end
+
+    def date
+      created_at.to_date
+    end
   end
 end

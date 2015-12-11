@@ -31,5 +31,9 @@ class Comment
     def author
       actor.login
     end
+
+    def date
+      created_at.to_date
+    end
   end
 end

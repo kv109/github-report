@@ -14,8 +14,14 @@ module Query
   end
 
   def where(hash)
-    @where = hash
+    conditions << hash
     self
+  end
+
+  private
+
+  def conditions
+    @conditions ||= []
   end
 
   def send_multiple_queries(queries)
@@ -33,10 +39,12 @@ module Query
 
   def send_query(query)
     client.send(*query).map(&method(:to_item)).tap do |results|
-      if @where
-        @where.each do |key, value|
-          results.select! do |result|
-            result.send(key) == value
+      if conditions.present?
+        conditions.each do |condition|
+          condition.each do |key, value|
+            results.select! do |result|
+              result.send(key) == value
+            end
           end
         end
       end
