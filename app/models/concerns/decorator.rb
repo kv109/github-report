@@ -14,4 +14,8 @@ module Decorator
   def respond_to?(meth)
     @component.respond_to?(meth)
   end
+
+  def inspect
+    @component.inspect
+  end
 end
