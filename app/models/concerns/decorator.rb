@@ -7,7 +7,12 @@ module Decorator
     if @component.respond_to?(meth)
       @component.send(meth, *args)
     else
-      super
+      begin
+        super
+      rescue StandardError => e
+        Rails.logger.info "Could not perform #{meth} with #{args}"
+        raise e
+      end
     end
   end
 
