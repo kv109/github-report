@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_date, only: [:show_partial]
+  before_action :set_date, only: [:show, :show_partial]
 
   def show
   end
