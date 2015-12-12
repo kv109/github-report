@@ -48,6 +48,9 @@ module Query
         end.map(&method(:to_item)).tap do |results|
           filter_results(results)
         end
+  rescue Octokit::NotFound => e
+    Rails.logger.warn e.message
+    return []
   end
 
   def filter_results(results)
