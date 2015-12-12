@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_date, only: [:show]
+  before_action :set_date, only: [:show_partial]
 
   def show
+  end
+
+  def show_partial
     map = {
         commits: Commit.new(@client).by_repo_and_user_and_date(current_repo_full_name!, current_collaborator!, @date),
         issue_comments: IssueComment.new(@client).by_repo_and_date(current_repo_full_name!, @date).where(author: current_collaborator!),
@@ -19,6 +22,8 @@ class UsersController < ApplicationController
 
     threads.each(&:join)
     @view = UsersShowView.new(map.fetch(:commits), map.fetch(:issue_comments), map[:code_review_comments])
+
+    render partial: 'show'
   end
 
   private
