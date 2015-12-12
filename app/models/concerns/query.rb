@@ -85,7 +85,9 @@ module Query
       else
         param.to_s
       end
-    end.join
+    end.tap do |arr|
+      arr.insert(0, @client.user.id.to_s)
+    end.join('+')
   end
 
   def to_item(resource_hash)
