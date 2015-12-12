@@ -1,6 +1,10 @@
 class ReposController < ApplicationController
   def index
+  end
+
+  def index_partial
     @repos = Repo.new(@client).repos.get
+    render partial: 'repos/index'
   end
 
   def show
