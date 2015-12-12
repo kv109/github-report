@@ -27,7 +27,7 @@
           - @view.commits_grouped_by_issue.each do |issue_number, commits|
             tr.header-row
               td colspan=3
-                = (issue_number ? (link_to "Issue #{commits[0].issue_number}", commits[0].issue_html_url) : 'Non assigned commits')
+                = (issue_number ? (link_to "Issue #{commits[0].issue_number}", commits[0].issue_html_url) : 'Commits non assigned to any issue')
             - commits.each do |commit|
               tr
                 td= commit.commit_message
