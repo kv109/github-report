@@ -4,7 +4,7 @@
       strong Repos
       =< "[#{current_user_login}]"
 
-    ol
+    ul
       - @repos.each do |repo|
         li
           = link_to repo.full_name, "##{repo.full_name}", data: { 'ajax-source' => show_repo_partial_path(repo.owner.login, repo.name), 'ajax-target' => '#contributors' }
