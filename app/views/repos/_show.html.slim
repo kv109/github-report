@@ -1,8 +1,10 @@
-h2
-  strong Contributors
-  =< "[#{@repo_full_name}]"
+.row
+  .small-12.columns.right
+    h3
+      strong Contributors
+      =< "[#{@repo_full_name}]"
 
-ol
-  - @collaborators.each do |collaborator|
-    li
-      = link_to collaborator.login, user_report_path(current_repo_owner!, current_repo!, collaborator.login)
+    ol
+      - @collaborators.each do |collaborator|
+        li
+          = link_to collaborator.login, user_report_path(current_repo_owner!, current_repo!, collaborator.login)

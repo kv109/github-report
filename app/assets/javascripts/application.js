@@ -15,5 +15,6 @@
 //#= require foundation
 //= require turbolinks
 //= require_tree './common'
+//= require_tree './pages'
 
 // $(function(){ $(document).foundation(); });
