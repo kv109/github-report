@@ -42,8 +42,9 @@ module Query
     cached_results = read_cache_from_query(key)
     return filter_results(cached_results) unless cached_results.nil?
 
-    client.send(*query)
-        .map(&:to_hash).tap do |hashes|
+    results = client.send(*query)
+    return [] if results.nil?
+    results.map(&:to_hash).tap do |hashes|
           write_query_to_cache(key, hashes)
         end.map(&method(:to_item)).tap do |results|
           filter_results(results)
