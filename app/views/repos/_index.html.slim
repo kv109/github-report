@@ -1,5 +1,5 @@
 .row
-  .small-6.columns.left
+  .small-12.medium-10.columns
     h3
       strong Repos
       =< "[#{current_user_login}]"
@@ -7,7 +7,6 @@
     ul
       - @repos.each do |repo|
         li
-          = link_to repo.full_name, "##{repo.full_name}", data: { 'ajax-source' => show_repo_partial_path(repo.owner.login, repo.name), 'ajax-target' => '#contributors' }
-
-  .small-6.columns.right
-    #contributors
+          = link_to repo.full_name, "##{repo.full_name}",
+                    data: { 'ajax-source' => show_repo_partial_path(repo.owner.login, repo.name), 'ajax-target' => "##{repo.owner.login}-#{repo.name}-contributors" }
+          .contributors id="#{repo.owner.login}-#{repo.name}-contributors"

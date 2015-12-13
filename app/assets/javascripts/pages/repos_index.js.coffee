@@ -1,19 +1,26 @@
-class @ReposIndex
+class ReposIndex
   constructor :->
     $('#repos-index').on('click', '[data-ajax-source]', ->
       $this = $(this)
-      url = $this.data('ajax-source')
-      console.log 'url', url
-      $.ajax(
-        url: url
-        beforeSend: -> $this.append('<div class="loading">Loading&#8230;</div>')
-      ).done(
-        (html) ->
-          $('.loading').remove()
-          $('#repos-index').find('[data-ajax-source]').removeClass('focus')
-          $this.addClass('focus')
-          $($this.data('ajax-target')).html(html)
-      ))
+      $target = $($this.data('ajax-target'))
+      $targetAlreadyLoaded = !$target.is(':empty')
+      $('#repos-index').find('.contributors').hide()
+      $('#repos-index').find('[data-ajax-source]').removeClass('focus')
+      $this.addClass('focus')
+
+      if $targetAlreadyLoaded
+        $target.show()
+      else
+        url = $this.data('ajax-source')
+        $.ajax(
+          url: url
+          beforeSend: ->
+            $this.append('<div class="loading">Loading&#8230;</div>')
+        ).done(
+          (html) ->
+            $('.loading').remove()
+            $target.show().html(html)
+        ))
 
 $ ->
   new ReposIndex()

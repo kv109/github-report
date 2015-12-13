@@ -1,2 +1,7 @@
 - cache do
-  #repos-show data-load-ajax=show_repo_partial_path
+  .row
+    .small-12.columns.right
+      h3
+        strong Contributors
+        =< "[#{current_repo_full_name!}]"
+      #repos-show data-load-ajax=show_repo_partial_path
