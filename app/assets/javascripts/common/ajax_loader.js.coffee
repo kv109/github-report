@@ -8,7 +8,8 @@ class AjaxLoader
         beforeSend: -> $this.append('<div class="loading">Loading&#8230;</div>')
       ).done(
         (html) ->
-          $this.replaceWith(html)
+          $('.loading').remove()
+          $this.append(html)
       )
 
 $ ->
