@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
     @client = Octokit::Client.new(:access_token => current_user.token) if current_user
   end
 
+  def current_user_login
+    @client.user.login if @client
+  end
+  helper_method :current_user_login
+
   def current_repo
     params[:repo]
   end

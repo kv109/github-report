@@ -1,6 +1,6 @@
 h2
-  | Active collaborators for
-  strong=< @repo_full_name
+  strong Contributors
+  =< "[#{@repo_full_name}]"
 
 ol
   - @collaborators.each do |collaborator|
