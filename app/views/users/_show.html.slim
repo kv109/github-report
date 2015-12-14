@@ -20,9 +20,9 @@
       caption Commits (#{@view.commits.size})
       - if @view.commits.present?
         thead
-          th Message
-          th Date
-          th
+          th width="70%" Message
+          th width="20%" Date
+          th width="10%"
         tbody
           - @view.commits_grouped_by_issue.each do |issue_number, commits|
             tr.header-row
@@ -44,9 +44,9 @@
       caption Comments (#{@view.all_comments.size})
       - if @view.all_comments.present?
         thead
-          th Body
-          th Date
-          th
+          th width="70%" Body
+          th width="20%" Date
+          th width="10%"
         tbody
         - @view.all_comments.each do |comment|
           tr
