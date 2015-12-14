@@ -4,16 +4,13 @@
       span.user-report-title-1= "#{current_collaborator!.upcase} / #{@date.to_s(:short)}"
 
       .date-links.right
-        ul.inline-list
-          - (0..5).map do |i|
-            li
-              - if i.zero?
-                - title = 'Today'
-              - elsif i < 2
-                - title = 'Yesterday'
-              - else
-                - title = "#{i} days ago"
-              = link_to(title, user_report_path(current_repo_owner!, current_repo!, current_collaborator!, date: i.days.ago.utc.strftime('%Y%m%d')), class: 'button tiny')
+        ul.pagination
+          li class=('current' if @date == Date.today)
+            = link_to('Today', user_report_path(current_repo_owner!, current_repo!, current_collaborator!, date: Date.today.strftime('%Y%m%d')), )
+          - (1..5).map do |i|
+            li class=('current' if @date == i.days.ago.utc.to_date)
+              - title = "#{i}"
+              = link_to(title, user_report_path(current_repo_owner!, current_repo!, current_collaborator!, date: i.days.ago.utc.strftime('%Y%m%d')))
 .row
   .small-12.columns.medium-11
     table.report-table
