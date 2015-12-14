@@ -39,8 +39,8 @@ module Query
 
   def send_query(query)
     key = query_cache_key(query)
-    cached_results = read_cache_from_query(key)
-    return filter_results(cached_results) unless cached_results.nil?
+    # cached_results = read_cache_from_query(key)
+    # return filter_results(cached_results) unless cached_results.nil?
 
     results = client.send(*query)
     return [] if results.nil?
