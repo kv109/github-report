@@ -7,11 +7,14 @@ class Resource::Query
   end
 
   def results
-    return cached_results unless cached_results.nil?
+    # return cached_results unless cached_results.nil?
 
     results = retrieve_results_from_github
-    return [] if results.nil?
-    results = results.map(&:to_hash)
+    if results.nil?
+      results = []
+    else
+      results = results.map(&:to_hash)
+    end
     results.tap do
       write_query_to_cache(results)
     end
@@ -23,7 +26,7 @@ class Resource::Query
     @client.send(*query)
   rescue Octokit::NotFound => e
     Rails.logger.warn e.message
-    return []
+    []
   end
 
   def write_query_to_cache(results)
@@ -32,9 +35,9 @@ class Resource::Query
   end
 
   def cached_results
-    # cached_results = Rails.cache.read(cache_key)
-    # return [] if cached_results == :empty_array
-    # cached_results
+    cached_results = Rails.cache.read(cache_key)
+    cached_results = [] if cached_results == :empty_array
+    cached_results
   end
 
   def cache_key
