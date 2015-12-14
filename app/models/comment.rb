@@ -1,6 +1,6 @@
 class Comment
 
-  include Query
+  include Resource
 
   def by_repo(repo)
     @query = [:repository_events, repo]

@@ -1,6 +1,6 @@
 class Branch
 
-  include Query
+  include Resource
 
   def by_repo(repo)
     @query = [:branches, repo]

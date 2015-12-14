@@ -1,6 +1,6 @@
 class Commit
 
-  include Query
+  include Resource
 
   def by_repo_and_user_and_date(repo, user, date)
     @queries = branches(repo).map(&:name).map do |branch|

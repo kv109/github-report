@@ -1,6 +1,6 @@
 class Repo
 
-  include Query
+  include Resource
 
   def repos
     @query = [:repos, nil, per_page: 200, sort: :pushed]

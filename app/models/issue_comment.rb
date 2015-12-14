@@ -1,6 +1,6 @@
 class IssueComment
 
-  include Query
+  include Resource
 
   def by_repo_and_date(repo, date)
     @query = [:issues_comments, repo, since: date]

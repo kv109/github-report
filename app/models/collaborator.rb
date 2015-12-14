@@ -1,6 +1,6 @@
 class Collaborator
 
-  include Query
+  include Resource
 
   def by_repo(repo)
     @query = [:contributors_stats, repo]
