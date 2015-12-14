@@ -6,7 +6,7 @@ Rails.application.configure do
        :failover => true,
        :socket_timeout => 1.5,
        :socket_failure_delay => 0.2,
-       :expires_after => 30.minutes,
+       :expires_in => 30.minutes,
        :pool_size => 10,
        :compress => true
       }
