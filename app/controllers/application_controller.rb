@@ -59,4 +59,18 @@ class ApplicationController < ActionController::Base
   def add_breadcrumbs
     nil
   end
+
+  def multiple_requests(queries)
+    threads   = []
+    responses = Array.new(queries.size)
+
+    queries.each_with_index do |query, index|
+      threads << Thread.new do
+        responses[index] = query.get
+      end
+    end
+
+    threads.each(&:join)
+    responses
+  end
 end
