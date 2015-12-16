@@ -7,7 +7,7 @@ class Resource::Query
   end
 
   def results
-    # return cached_results unless cached_results.nil?
+    return cached_results unless cached_results.nil?
 
     results = retrieve_results_from_github
     if results.nil?
