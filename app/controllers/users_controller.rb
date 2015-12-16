@@ -7,7 +7,9 @@ class UsersController < ApplicationController
   def show_partial
     map = {
         commits: Commit.new(@client).by_repo_and_user_and_date(current_repo_full_name!, current_collaborator!, @date),
-        issue_comments: IssueComment.new(@client).by_repo_and_date(current_repo_full_name!, @date).where(author: current_collaborator!),
+        issue_comments: IssueComment.new(@client).by_repo_and_date(current_repo_full_name!, @date)
+                            .where(author: current_collaborator!)
+                            .where(date: @date),
         code_review_comments: Comment.new(@client).by_repo(current_repo_full_name!)
             .where(author: current_collaborator!)
             .where(date: @date)
