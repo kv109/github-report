@@ -14,8 +14,6 @@ engines:
       languages:
       - ruby
       - javascript
-      - python
-      - php
   eslint:
     enabled: true
   fixme:
@@ -43,3 +41,4 @@ exclude_paths:
 - db/**/*
 - test/**/*
 - vendor/**/*
+- .rubocop.yml
