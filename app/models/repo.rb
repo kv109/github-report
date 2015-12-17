@@ -7,8 +7,6 @@ class Repo
     self
   end
 
-  private
-
   class Item
     include Decorator
   end

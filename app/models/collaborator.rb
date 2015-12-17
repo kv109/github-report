@@ -11,8 +11,6 @@ class Collaborator
     super.reverse
   end
 
-  private
-
   class Item
     include Decorator
 

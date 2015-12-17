@@ -7,8 +7,6 @@ class Branch
     self
   end
 
-  private
-
   class Item
     include Decorator
   end
