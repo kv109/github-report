@@ -1,2 +1,4 @@
-.authform.small-4.columns.small-centered
-  = link_to 'Login using Github', user_omniauth_authorize_path(:github), class: 'button expand'
+.row
+  .authform.small-3.columns.small-centered
+    = image_tag 'octocat.png'
+    = link_to 'Login using Github', user_omniauth_authorize_path(:github), class: 'button small expand'
