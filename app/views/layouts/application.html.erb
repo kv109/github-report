@@ -10,7 +10,9 @@
 
   <body data-remaining-rate-limit="<%= @client.rate_limit_remaining if @client %>">
     <header>
-      <%= render 'layouts/navigation' %>
+      <% if current_user %>
+        <%= render 'layouts/navigation' %>
+      <% end %>
     </header>
     <main class="small-12 columns" role="main">
       <%= render 'layouts/messages' %>

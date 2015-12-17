@@ -116,7 +116,7 @@ $include-html-global-classes: $include-html-classes;
 // $black       : #000000;
 
 // We use these as default colors throughout
-// $primary-color: #008CBA;
+ $primary-color: darken(#00a8ba, 10%);
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
@@ -1403,7 +1403,7 @@ $form-spacing: rem-calc(22);
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
+ $topbar-bg-color: darken($primary-color, 13%);
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin

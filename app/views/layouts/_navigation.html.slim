@@ -7,4 +7,4 @@ nav.top-bar data-topbar=""
       = render 'layouts/navigation_links'
 
     ul.right
-      li = link_to 'Sign out', destroy_user_session_path, method: :delete
+      li = link_to "Sign out [#{current_user_login}]", destroy_user_session_path, method: :delete

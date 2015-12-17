@@ -1,4 +1,10 @@
 .row
-  .authform.small-3.columns.small-centered
+  .authform.small-6.medium-6.columns.small-centered
+    h5.text-right
+      | welcome to
+    h2.text-center
+      strong Github Timesheets
+  .authform.small-5.medium-3.columns.small-centered
     = image_tag 'octocat.png'
-    = link_to 'Login using Github', user_omniauth_authorize_path(:github), class: 'button small expand'
+  .authform.small-7.medium-3.columns.small-centered
+    = link_to 'Login with Github', user_omniauth_authorize_path(:github), class: 'button small expand'

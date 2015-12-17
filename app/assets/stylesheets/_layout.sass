@@ -6,3 +6,53 @@ main
 a.focus
   font-size: larger
   font-weight: bold
+
+ol
+  counter-reset: li
+  /* Initiate a counter
+  list-style: none
+  /* Remove default numbering
+  *list-style: decimal
+  /* Keep using default numbering for IE6/7
+  font: 15px 'trebuchet MS', 'lucida sans'
+  padding: 0
+  margin-bottom: 4em
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
+  ol
+    margin: 0 0 0 2em
+
+
+.rounded-list
+  .rounded-list
+    a
+      font-size: smaller
+  a
+    position: relative
+    display: block
+    //padding: .2em .4em .2em 2em
+    //*padding: .2em
+    padding-left: .8em
+    margin: .5em 0
+    color: #444
+    text-decoration: none
+    border-radius: .3em
+    transition: all 2s ease-out
+    &:hover
+      background: #eee
+      &:before
+        transform: rotate(180deg)
+    &:before
+      content: ' '
+      counter-increment: li
+      position: absolute
+      left: -1.3em
+      top: 50%
+      margin-top: -1em
+      background: darken(#00a8ba, 15%)
+      height: 2em
+      width: 2em
+      line-height: 1.6em
+      border: .5em solid #fff
+      text-align: center
+      font-weight: bold
+      transition: all .3s ease-out
