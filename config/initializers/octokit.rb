@@ -19,21 +19,35 @@ module Octokit
     module Stats
 
       def get_stats(repo, metric, options = {})
-        request = -> { get_stats_data(repo, metric, options = {}) }
-        data = request.call
-
         if Octokit.wait_for_stats
-          time_left = Octokit.wait_for_stats.to_i
-          interval = time_left / 10.0
+          get_stats_data_patiently(repo, metric, options)
+        else
+          get_stats_data(repo, metric, options)
+        end.tap do
+          return nil if cache_not_ready?
+        end
+      end
 
-          while last_response.status == 202 && time_left > 0 do
-            sleep interval
-            data = request.call
-            time_left -= interval
-          end
+      def get_stats_data_patiently(repo, metric, options = {})
+        data = nil
+        time_start = Time.now
+
+        loop do
+          data = get_stats_data(repo, metric, options)
+          timeout = Time.now - time_start > Octokit.wait_for_stats
+          break if cache_ready? || timeout
+          sleep 0.1
         end
 
         data
+      end
+
+      def cache_not_ready?
+        last_response.status == 202
+      end
+
+      def cache_ready?
+        last_response.status == 200
       end
 
       def get_stats_data(repo, metric, options = {})
