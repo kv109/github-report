@@ -12,7 +12,9 @@ class ReposController < ApplicationController
 
   def show_partial
     @repo_full_name = current_repo_owner! + '/' + current_repo!
-    @collaborators = Collaborator.new(@client).by_repo(@repo_full_name).get
+    @collaborators = Collaborator.new(@client).by_repo(@repo_full_name)
+                         .where({ last_weeks_commits: 0 }, :>)
+                         .get
     render partial: 'repos/show'
   end
 

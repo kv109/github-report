@@ -13,8 +13,8 @@ module Resource
     end
   end
 
-  def where(hash)
-    conditions << hash
+  def where(hash, operator = :eql?)
+    conditions << hash.merge(_operator: operator)
     self
   end
 
@@ -46,9 +46,11 @@ module Resource
   def filter_results(results)
     if conditions.present?
       conditions.each do |condition|
+        operator = condition.delete(:_operator)
         condition.each do |key, value|
           results.select! do |result|
-            result.send(key) == value
+            expected_value = result.send(key)
+            expected_value.send(operator, value)
           end
         end
       end
