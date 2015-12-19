@@ -1,10 +1,9 @@
 class ReposController < ApplicationController
-  def index
-  end
 
-  def index_partial
+  layout :ajaxify_layout, only: [:index]
+
+  def index
     @repos = Repo.new(@client).repos.get
-    render partial: 'repos/index'
   end
 
   def show

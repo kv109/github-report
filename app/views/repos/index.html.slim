@@ -1,2 +1,13 @@
-- cache do
-  #repos-index data-load-ajax=repos_partial_path
+= ajaxify do
+  #repos-index
+    .row
+      .small-12.medium-8.columns.medium-centered
+        h3
+          strong Repos
+          =< "[#{current_user_login}]"
+
+        ol.rounded-list
+          - @repos.each do |repo|
+            li data-ajax-source=show_repo_partial_path(repo.owner.login, repo.name) data-ajax-target="##{repo.owner.login}-#{repo.name}-contributors"
+              = link_to repo.full_name, "##{repo.full_name}"
+              .contributors id="#{repo.owner.login}-#{repo.name}-contributors"

@@ -1,10 +1,13 @@
 class AjaxLoader
   constructor: ->
-    $('[data-load-ajax]').each ->
+    $('[data-ajaxify]').each ->
       $this = $(this)
+      params = $.extend(
+        { partial: true },
+        $this.data('load-ajax-data')
+      )
       $.ajax(
-        url: $this.data('load-ajax')
-        data: $this.data('load-ajax-data')
+        data: params
         beforeSend: -> $this.append('<div class="loading">Loading&#8230;</div>')
       ).done(
         (html) ->
