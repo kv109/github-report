@@ -1,15 +1,4 @@
 Rails.application.configure do
-  config.cache_store = :dalli_store,
-      (ENV["MEMCACHIER_SERVERS"] || "").split(","),
-      {:username => ENV["MEMCACHIER_USERNAME"],
-       :password => ENV["MEMCACHIER_PASSWORD"],
-       :failover => true,
-       :socket_timeout => 1.5,
-       :socket_failure_delay => 0.2,
-       :expires_in => 30.minutes,
-       :pool_size => 10,
-       :compress => true
-      }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

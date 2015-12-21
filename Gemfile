@@ -7,8 +7,6 @@ gem 'faraday-http-cache'
 gem 'figaro'
 gem 'omniauth-github'
 gem 'devise'
-gem 'dalli'
-gem 'connection_pool'
 
 gem 'rails', '4.2.5'
 gem 'sass-rails', '~> 5.0'
