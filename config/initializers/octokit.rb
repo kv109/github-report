@@ -66,8 +66,9 @@ Octokit.configure do |c|
 end
 
 stack = Faraday::RackBuilder.new do |builder|
-  builder.use Faraday::HttpCache
+  builder.response :logger
   builder.use Octokit::Response::RaiseError
+  builder.use Faraday::HttpCache
   builder.adapter Faraday.default_adapter
 end
 Octokit.middleware = stack
