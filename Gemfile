@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 gem 'octokit', '~> 4.0'
+gem 'faraday-http-cache'
 gem 'figaro'
 gem 'omniauth-github'
 gem 'devise'
