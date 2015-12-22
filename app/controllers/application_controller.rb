@@ -73,4 +73,8 @@ class ApplicationController < ActionController::Base
     threads.each(&:join)
     responses
   end
+
+  def ajaxify_layout
+    params[:partial] ? false : 'application'
+  end
 end

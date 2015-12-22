@@ -1,21 +1,27 @@
 class ReposController < ApplicationController
-  def index
-  end
 
-  def index_partial
+  layout :ajaxify_layout, only: [:index, :show]
+
+  def index
     @repos = Repo.new(@client).repos.get
-    render partial: 'repos/index'
   end
 
   def show
-  end
-
-  def show_partial
     @repo_full_name = current_repo_owner! + '/' + current_repo!
-    @collaborators = Collaborator.new(@client).by_repo(@repo_full_name)
+    @collaborators = Collaborator.new(@client)
+                         .by_repo(@repo_full_name)
                          .where({ last_weeks_commits: 0 }, :>)
                          .get
-    render partial: 'repos/show'
+  end
+
+  def contributors
+    @repo_full_name = current_repo_owner! + '/' + current_repo!
+    @collaborators = Collaborator.new(@client)
+                         .by_repo(@repo_full_name)
+                         .where({ last_weeks_commits: 0 }, :>)
+                         .get
+
+    render partial: 'repos/contributors'
   end
 
   private

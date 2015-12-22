@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_date, only: [:show, :show_partial]
 
-  def show
-  end
+  layout :ajaxify_layout, only: [:show]
 
-  def show_partial
+  def show
     responses = multiple_requests(
         [
             Commit.new(@client).by_repo_and_user_and_date(current_repo_full_name!, current_collaborator!, @date),
@@ -16,8 +15,6 @@ class UsersController < ApplicationController
                 .where(date: @date)
         ])
     @view = UsersShowView.new(*responses)
-
-    render partial: 'show'
   end
 
   private
