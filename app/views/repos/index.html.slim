@@ -8,6 +8,6 @@
 
         ol.rounded-list
           - @repos.each do |repo|
-            li data-ajax-source=show_repo_partial_path(repo.owner.login, repo.name) data-ajax-target="##{repo.owner.login}-#{repo.name}-contributors"
+            li data-ajax-source=repo_contributors_path(repo.owner.login, repo.name) data-ajax-target="##{repo.owner.login}-#{repo.name}-contributors"
               = link_to repo.full_name, "##{repo.full_name}"
               .contributors id="#{repo.owner.login}-#{repo.name}-contributors"
