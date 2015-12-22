@@ -8,7 +8,7 @@ class ReposController < ApplicationController
 
   def show
     @repo_full_name = current_repo_owner! + '/' + current_repo!
-    @collaborators = Collaborator.new(@client)
+    @collaborators = Stats.new(@client)
                          .by_repo(@repo_full_name)
                          .where({ last_weeks_commits: 0 }, :>)
                          .get
@@ -16,7 +16,7 @@ class ReposController < ApplicationController
 
   def contributors
     @repo_full_name = current_repo_owner! + '/' + current_repo!
-    @collaborators = Collaborator.new(@client)
+    @collaborators = Stats.new(@client)
                          .by_repo(@repo_full_name)
                          .where({ last_weeks_commits: 0 }, :>)
                          .get

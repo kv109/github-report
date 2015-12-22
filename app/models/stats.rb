@@ -1,4 +1,4 @@
-class Collaborator
+class Stats
 
   include Resource
 
