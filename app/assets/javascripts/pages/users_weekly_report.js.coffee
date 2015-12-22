@@ -4,9 +4,9 @@ class @UsersWeeklyReport
       labels : @getWeeks()
       datasets : [
         {
-          fillColor : "#00DBED",
-          strokeColor : "#00a8ba",
-          pointColor : "#00a8ba",
+          fillColor : "#00a8ba",
+          strokeColor : "#003e45",
+          pointColor : "#003e45",
           pointStrokeColor : "#fff",
           data : @getCommitsNumber()
         }
