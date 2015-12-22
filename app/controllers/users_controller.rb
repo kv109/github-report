@@ -17,6 +17,15 @@ class UsersController < ApplicationController
     @view = UsersShowView.new(*responses)
   end
 
+  def weekly_report
+    @stats = Stats.new(@client)
+                         .by_repo(current_repo_full_name!)
+                         .where(login: current_collaborator!)
+                         .get
+
+    @stats = @stats.map(&:component).map(&:to_h)
+  end
+
   private
 
   def add_breadcrumbs

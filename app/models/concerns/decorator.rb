@@ -1,4 +1,6 @@
 module Decorator
+  attr_reader :component
+
   def initialize(component)
     @component = component
   end
