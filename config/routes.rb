@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   get '/:owner/:repo/' => 'repos#show', as: :show_repo
   get '/:owner/:repo/contributors' => 'repos#contributors', as: :repo_contributors
   get '/:owner/:repo/:user' => 'users#show', as: :user_report
-  get '/:owner/:repo/:user/weekly_report' => 'users#weekly_report', as: :user_weekly_report
+  get '/:owner/:repo/:user/three_months_report' => 'users#three_months_report', as: :user_three_months_report
 end
