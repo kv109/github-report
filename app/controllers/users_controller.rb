@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_date, only: [:show, :show_partial]
+  before_action :set_date, only: [:show]
 
-  layout :ajaxify_layout, only: [:show]
+  layout :ajaxify_layout, only: [:show, :three_months_report]
 
   def show
     responses = multiple_requests(

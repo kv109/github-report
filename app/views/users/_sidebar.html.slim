@@ -1,0 +1,7 @@
+.row.sidebar
+  strong REPORTS
+  ol.rounded-list
+    li
+      = link_to '1 day', user_report_path(current_repo_owner!, current_repo!, current_collaborator!)
+    li
+      = link_to '3 months', user_three_months_report_path(current_repo_owner!, current_repo!, current_collaborator!)

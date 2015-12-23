@@ -1,6 +1,8 @@
-.row
-  .small-12.columns.medium-11
-    .user-report-menu
-      span.user-report-title-1= "#{current_collaborator!.upcase} / Commits per week"
+= ajaxify do
+  .row.left
+    .columns.medium-3.left
+      = render 'sidebar'
+    .columns.medium-9
+      = render 'three_months_report'
 
-    canvas#canvas height="450" width="600" data-stats=@stats.to_json
+  = javascript_include_tag 'pages/three_months_report'

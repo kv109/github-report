@@ -12,6 +12,7 @@ class AjaxLoader
       ).done(
         (html) ->
           $this.append(html)
+          $this.trigger('ajax-content-loaded')
       ).error(
         -> $this.append('Something went wrong')
       ).complete(

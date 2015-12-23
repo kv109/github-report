@@ -1,19 +1,21 @@
-class @UsersWeeklyReport
+class UsersWeeklyReport
   constructor: ->
-    data = {
-      labels : @getWeeks()
-      datasets : [
-        {
-          fillColor : "#00a8ba",
-          strokeColor : "#003e45",
-          pointColor : "#003e45",
-          pointStrokeColor : "#fff",
-          data : @getCommitsNumber()
-        }
-      ]
-    }
+    $('[data-ajaxify]').on('ajax-content-loaded', =>
+      data = {
+        labels : @getWeeks()
+        datasets : [
+          {
+            fillColor : "#00a8ba",
+            strokeColor : "#003e45",
+            pointColor : "#003e45",
+            pointStrokeColor : "#fff",
+            data : @getCommitsNumber()
+          }
+        ]
+      }
 
-    myNewChart = new Chart(@getCanvas().get(0).getContext("2d")).Line(data)
+      myNewChart = new Chart(@getCanvas().get(0).getContext("2d")).Line(data)
+    )
 
   getCanvas: ->
     $("#canvas")
@@ -30,5 +32,6 @@ class @UsersWeeklyReport
 
   getStats: ->
     @getCanvas().data('stats')[0].weeks.slice(-10)
+
 $ ->
   new UsersWeeklyReport()
